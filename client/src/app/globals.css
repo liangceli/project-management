@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+  @apply text-sm;
+  @apply bg-white;
+  @apply dark:bg-black;
+}
+
+/* TIMELINE STYLING */
+.timeline ._3_ygE {
+  @apply rounded-tl-md border border-r-0 border-[#e6e4e4];
+}
+.timeline ._2eZzQ {
+  @apply border-[#e6e4e4];
+}
+.timeline ._2dZTy {
+  @apply fill-white;
+}
+.timeline ._2dZTy:nth-child(even) {
+  @apply fill-[#f5f5f5];
+}
+.timeline ._35nLX {
+  @apply fill-white stroke-[#e6e4e4];
+}
+.timeline ._9w8d5 {
+  @apply fill-[#333] ;
+}
+.timeline ._34SS0 {
+  @apply bg-white;
+}
+.timeline ._34SS0:nth-of-type(even) {
+  @apply bg-[#f5f5f5];
+}
+.timeline ._RuwuK,
+.timeline ._3rUKi,
+.timeline ._1rLuZ {
+  @apply stroke-[#e6e4e4];
+}
+.timeline ._3ZbQT {
+  @apply border-l-0 border-[#e6e4e4];
+}
+.timeline ._3T42e {
+  @apply bg-white;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
