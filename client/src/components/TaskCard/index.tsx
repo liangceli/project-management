@@ -16,7 +16,7 @@ const TaskCard = ({task}: Props) => {
                     {task.attachments && task.attachments.length > 0 && (
 
                         <Image 
-                            src={`/${task.attachments[0].fileURL}`}
+                            src={`https://pm-llc-s3-images.s3.ap-southeast-2.amazonaws.com/${task.attachments[0].fileURL}`}
                             alt={task.attachments[0].fileName}
                             width={400}
                             height={200}
