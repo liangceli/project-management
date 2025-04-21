@@ -1,4 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
 export interface Project {
     id: number;
@@ -75,11 +76,47 @@ export interface Team {
 }
 // api 变量存储 API slice，稍后会被用于 store.ts 里注册到 Redux。
 export const api = createApi({
-    baseQuery: fetchBaseQuery({baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL}),
+    baseQuery: fetchBaseQuery({baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+        prepareHeaders: async (headers) => { // 这是关键配置，用于给每个请求自动加 Header。它会在每次发请求前自动执行。
+            const session = await fetchAuthSession(); // 从 Amplify 中获取当前登录用户的 session（包含 Token)
+            const { accessToken } = session.tokens ?? {}; // 从 session 中提取 accessToken（JWT 令牌）
+            if (accessToken) { // 如果有 token，就在请求头中加上：
+                               // Authorization: Bearer eyJraWQiOiJ...
+              headers.set("Authorization", `Bearer ${accessToken}`);
+            }
+            return headers; // 最后一定要返回 headers，否则请求不会带上这些自定义的 Header
+          },
+    }),
     reducerPath: "api", // reducerPath 设定 Redux store 中 API slice 的命名空间，这里是 "api"。
     tagTypes: ["Projects", "Tasks", "Users", "Teams"],
     endpoints: (build) => ({
-        
+        getAuthUser: build.query({
+            queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
+              try {
+                const user = await getCurrentUser(); // 获取当前登录的用户对象 返回当前已登录的 Cognito 用户的基础信息，比如用户名、邮箱等。
+                                                     // 不包含 token 或 session，只是一些公共属性。
+                const session = await fetchAuthSession(); // 获取当前用户的认证会话信息 包含当前用户的 token、userSub（Cognito ID）用于校验用户身份
+                if (!session) throw new Error("No session found");
+                const { userSub } = session; // cognito id
+                const { accessToken } = session.tokens ?? {};
+      
+                const userDetailsResponse = await fetchWithBQ(`users/${userSub}`); // 对应这里（传进来的是cognito id）： router.get("/:cognitoId", getUser); 向后端请求当前Cognito用户的详细信息 根据cognito ID查询
+                const userDetails = userDetailsResponse.data as User; // 它是把 userDetailsResponse.data 强制认为是一个符合 User 类型的对象。将返回的用户信息强制视为符合你定义的 User 类型，方便类型安全地使用字段
+
+                // 用户登录，获取 Cognito Session（含 userSub）
+
+                // 前端调用：GET /users/<userSub> 👉
+
+                // 后端使用 getUser(req.params.cognitoId) 从数据库查出用户详细信息
+
+                // 前端拿到完整用户数据，保存在 userDetails
+                return { data: { user, userSub, userDetails } };
+              } catch (error: any) {
+                return { error: error.message || "Could not fetch user data" };
+              }
+            },
+          }),
+
         getProjects: build.query<Project[], void>({
             query: () => "projects",
             providesTags: ["Projects"],
@@ -154,4 +191,5 @@ export const {useGetProjectsQuery,
               useGetUsersQuery,
               useGetTeamsQuery,
               useGetTasksByUserQuery,
+              useGetAuthUserQuery,
             } = api;
