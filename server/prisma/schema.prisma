@@ -71,7 +71,7 @@ model Task {
   assignedUserId Int?
 
   project         Project          @relation(fields: [projectId], references: [id])
-  author          User             @relation("TaskAuthor", fields: [authorUserId], references: [userId]) // 这行代码的作用是在 Task 表（假设 Task 是定义任务的表）中建立一个外键关系，用于表示任务的创建者 (author) 是 User 表中的某个用户。TaskAuthor 和TaskAssignee 是 Prisma 关系的名称，用于区分不同类型的 User 关联。
+  author          User             @relation("TaskAuthor", fields: [authorUserId], references: [userId])
   assignee        User?            @relation("TaskAssignee", fields: [assignedUserId], references: [userId])
   taskAssignments TaskAssignment[]
   attachments     Attachment[]
