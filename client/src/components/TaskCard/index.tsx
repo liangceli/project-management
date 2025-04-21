@@ -11,7 +11,7 @@ const TaskCard = ({task}: Props) => {
     <div className='mb-3 rounded bg-white p-4 shadow'>
         {task.attachments && task.attachments.length > 0 && (
             <div>
-                <strong>AAttachments:</strong>
+                <strong>Attachments:</strong>
                 <div className='flex flex-wrap'>
                     {task.attachments && task.attachments.length > 0 && (
 
