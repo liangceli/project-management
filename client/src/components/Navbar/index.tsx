@@ -47,14 +47,14 @@ const Navbar = () => {
 
       {/* ICONS */}
       <div className='flex items-center'>
-        <button onClick = {() => dispatch(setIsDarkMode(!isDarkMode))} className={isDarkMode ? `rounded p-2 dark:hover:bg-gray-100` : `rounded p-2 hover:bg-gray-100`}>
+        {/* <button onClick = {() => dispatch(setIsDarkMode(!isDarkMode))} className={isDarkMode ? `rounded p-2 dark:hover:bg-gray-100` : `rounded p-2 hover:bg-gray-100`}>
           {isDarkMode ? (
             <Sun className='h-6 w-6 cursor-pointer dark: text-black'/>
           ) : (
             <Moon className='h-6 w-6 cursor-pointer dark: text-black'/>
           )
           }
-        </button>
+        </button> */}
         <Link
              href="/settings"
              className={isDarkMode ? `h-min w-min rounded p-2 dark:hover:bg-gray-100` : `h-min w-min rounded p-2 hover:bg-gray-100`}
@@ -65,9 +65,9 @@ const Navbar = () => {
         <div className='ml-2 mr-5 hidden min-h-[2rem] w-[0.1rem] bg-gray-200 md:inline-block'>
         </div>
 
-        <div className='hidden item-center justify-between md:flex'>
+        {/* <div className='flex item-center justify-between'> */}
 
-           <div className="align-center flex h-9 w-9 justify-center">
+           {/* <div className="align-center flex h-9 w-9 justify-center">
 
             {!!currentUserDetails?.profilePictureUrl ? (
               <Image
@@ -80,20 +80,27 @@ const Navbar = () => {
             ) : (
               <User className="h-6 w-6 cursor-pointer self-center rounded-full" />
             )}
-          </div>
+          </div> */}
 
        
 
-          <span className='mx-3 text-gray-800'>
+          {/* <span className='mx-3 text-gray-800'>
             {currentUserDetails?.username}
-          </span>
+          </span> */}
 
-          <button className='hidden rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block' onClick={handleSignOut}>
+          <button className='block rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500' onClick={handleSignOut}>
             Sign out
           </button> 
         
-        </div>
+        {/* </div> */}
       </div>
+
+      {/* <div className='flex'>
+        <button className='hidden rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block' onClick={handleSignOut}>
+            Sign out
+      </button> 
+      </div>
+       */}
     </div>
   )
 }
