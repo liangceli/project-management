@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Home } from 'lucide-react';
 import { setIsSidebarCollapsed } from '@/state';
 import { useGetAuthUserQuery, useGetProjectsQuery } from '@/state/api';
-import { signOut } from 'aws-amplify/auth';
+// import { signOut } from 'aws-amplify/auth';
 
 const Sidebar = () => {
     const [showProjects, setShowProjects] = useState(true);
@@ -18,18 +18,18 @@ const Sidebar = () => {
     const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed,);
     
-    const {data: currentUser} = useGetAuthUserQuery({});
+    // const {data: currentUser} = useGetAuthUserQuery({});
     
-    const handleSignOut = async() => {
-        try {
-            await signOut(); 
-        } catch (error) {
-            console.error("Error signing out: ",error)
-        }
-    }
+    // const handleSignOut = async() => {
+    //     try {
+    //         await signOut(); 
+    //     } catch (error) {
+    //         console.error("Error signing out: ",error)
+    //     }
+    // }
 
-    if(!currentUser) return null;
-    const currentUserDetails = currentUser?.userDetails;
+    // if(!currentUser) return null;
+    // const currentUserDetails = currentUser?.userDetails;
 
     
 

@@ -93,7 +93,9 @@ export const api = createApi({
       queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
         try {
           const user = await getCurrentUser();
+          console.log("👤 Cognito user:", user);
           const session = await fetchAuthSession();
+          console.log("📦 Cognito session:", session);
           if (!session) throw new Error("No session found");
           const { userSub } = session;
           const { accessToken } = session.tokens ?? {};

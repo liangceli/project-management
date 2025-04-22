@@ -24,7 +24,8 @@ export const getUser = async(req: Request, res: Response): Promise<void> => {
         });    
 
         res.json(user);
-
+        console.log("User:", user);
+        
     } catch (error: any) {
         res.status(500).json({message: `Error retrieving user: ${error.message}`});
     }
