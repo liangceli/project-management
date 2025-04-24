@@ -123,7 +123,7 @@ const Sidebar = () => {
                 />
             ))}
             {/* PRIORITIES LINKS */}
-            <button
+            {/* <button
                     onClick= {() => {
                         setShowPriority((prev) => !prev)
                     }}
@@ -136,8 +136,8 @@ const Sidebar = () => {
                     <ChevronDown className='h-5 w-5'/>
                 )}
 
-            </button>
-            {showPriority && (
+            </button> */}
+            {/* {showPriority && (
                 <>
                     <SidebarLink icon={AlertCircle} label="Urgent" href="/priority/urgent"/>
                     <SidebarLink icon={ShieldAlert} label="High" href="/priority/high"/>
@@ -145,7 +145,7 @@ const Sidebar = () => {
                     <SidebarLink icon={AlertOctagon} label="Low" href="/priority/low"/>
                     <SidebarLink icon={Layers3} label="Backlog" href="/priority/backlog"/>
                 </>
-            )}
+            )} */}
 
         </div>
 
