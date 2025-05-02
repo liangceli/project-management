@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Home } from 'lucide-react';
 import { setIsSidebarCollapsed } from '@/state';
 import { useGetAuthUserQuery, useGetProjectsQuery } from '@/state/api';
-// import { signOut } from 'aws-amplify/auth';
+import { signOut } from 'aws-amplify/auth';
 
 const Sidebar = () => {
     const [showProjects, setShowProjects] = useState(true);
@@ -18,18 +18,18 @@ const Sidebar = () => {
     const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed,);
     
-    // const {data: currentUser} = useGetAuthUserQuery({});
+    const {data: currentUser} = useGetAuthUserQuery({});
     
-    // const handleSignOut = async() => {
-    //     try {
-    //         await signOut(); 
-    //     } catch (error) {
-    //         console.error("Error signing out: ",error)
-    //     }
-    // }
+    const handleSignOut = async() => {
+        try {
+            await signOut(); 
+        } catch (error) {
+            console.error("Error signing out: ",error)
+        }
+    }
 
-    // if(!currentUser) return null;
-    // const currentUserDetails = currentUser?.userDetails;
+    if(!currentUser) return null;
+    const currentUserDetails = currentUser?.userDetails;
 
     
 
@@ -123,7 +123,7 @@ const Sidebar = () => {
                 />
             ))}
             {/* PRIORITIES LINKS */}
-            {/* <button
+            <button
                     onClick= {() => {
                         setShowPriority((prev) => !prev)
                     }}
@@ -136,8 +136,8 @@ const Sidebar = () => {
                     <ChevronDown className='h-5 w-5'/>
                 )}
 
-            </button> */}
-            {/* {showPriority && (
+            </button>
+            {showPriority && (
                 <>
                     <SidebarLink icon={AlertCircle} label="Urgent" href="/priority/urgent"/>
                     <SidebarLink icon={ShieldAlert} label="High" href="/priority/high"/>
@@ -145,11 +145,11 @@ const Sidebar = () => {
                     <SidebarLink icon={AlertOctagon} label="Low" href="/priority/low"/>
                     <SidebarLink icon={Layers3} label="Backlog" href="/priority/backlog"/>
                 </>
-            )} */}
+            )}
 
         </div>
 
-        {/* <div className="z-10 mt-2 flex w-full flex-col items-center gap-4 bg-white px-8 py-4 md:hidden">
+        <div className="z-10 mt-2 flex w-full flex-col items-center gap-4 bg-white px-8 py-4 md:hidden">
             <div className="flex w-full items-center">
             <div className="align-center flex h-9 w-9 justify-center">
                 {!!currentUserDetails?.profilePictureUrl ? (
@@ -174,7 +174,7 @@ const Sidebar = () => {
                 Sign out
             </button>
             </div>
-      </div> */}
+      </div>
     </div>
   );
 };

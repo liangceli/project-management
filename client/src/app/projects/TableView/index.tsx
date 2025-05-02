@@ -86,15 +86,15 @@ const TableView = ({id,setIsModalNewTaskOpen}: Props) => {
     <div className='h-[540px] w-full px-4 pb-8 xl:px-6'>
       <div className='pt-5'>
         <Header name="Table"
-         buttonComponent={
-         <button 
-                className='flex items-center rounded bg-blue-500 px-3 py-2 text-white hover:bg-blue-600'
-                onClick={() => setIsModalNewTaskOpen(true)}>
+        //  buttonComponent={
+        //  <button 
+        //         className='flex items-center rounded bg-blue-500 px-3 py-2 text-white hover:bg-blue-600'
+        //         onClick={() => setIsModalNewTaskOpen(true)}>
 
-                Add Task
+        //         Add Task
 
-         </button>
-        }
+        //  </button>
+        // }
          isSmallText />
       </div>
 
